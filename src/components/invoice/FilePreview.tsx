@@ -16,6 +16,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CodeIcon from '@mui/icons-material/Code';
 import PDFPreview from './PDFPreview';
+import XMLPreview from './XMLPreview';
 
 interface FilePreviewProps {
   file: File;
@@ -81,9 +82,7 @@ export default function FilePreview({ file, onDelete, validationType }: FilePrev
           overflow: 'auto'
         }}>
           {file.type === 'application/xml' || file.name.endsWith('.xml') ? (
-            <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-              {preview}
-            </pre>
+            <XMLPreview file={file} />
           ) : (
             <PDFPreview file={file} />
           )}
