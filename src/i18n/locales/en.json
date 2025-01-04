@@ -1,0 +1,19 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "invoices": "Invoices",
+    "upload": "Upload"
+  },
+  "upload": {
+    "title": "Upload Invoice",
+    "selectFiles": "Select Files",
+    "dragDropHint": "Drag and drop your XRechnung (XML) or ZUGFeRD (PDF) files here, or click to select files",
+    "uploadSuccess": "Files uploaded successfully!",
+    "uploadError": "Failed to upload file. Please try again."
+  }
+} 

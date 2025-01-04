@@ -1,0 +1,19 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "invoices": "Factures",
+    "upload": "Télécharger"
+  },
+  "upload": {
+    "title": "Télécharger une facture",
+    "selectFiles": "Sélectionner des fichiers",
+    "dragDropHint": "Glissez et déposez vos fichiers XRechnung (XML) ou ZUGFeRD (PDF) ici, ou cliquez pour sélectionner des fichiers",
+    "uploadSuccess": "Fichiers téléchargés avec succès !",
+    "uploadError": "Échec du téléchargement du fichier. Veuillez réessayer."
+  }
+} 
