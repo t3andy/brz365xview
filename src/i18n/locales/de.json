@@ -16,9 +16,20 @@
     "uploadSuccess": "Dateien erfolgreich hochgeladen!",
     "uploadError": "Fehler beim Hochladen der Datei. Bitte versuchen Sie es erneut.",
     "dropFilesHere": "Dateien hier ablegen",
-    "invalidFileType": "Ungültiger Dateityp. Nur XML und PDF Dateien sind erlaubt.",
+    "invalidFileType": "Ungültiger Dateityp. Nur XRechnung (XML) und ZUGFeRD (PDF) Dateien sind erlaubt",
     "uploadFiles": "Dateien hochladen",
     "serverNotReachable": "Server ist nicht erreichbar. Bitte versuchen Sie es später erneut.",
-    "networkError": "Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung."
+    "networkError": "Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung.",
+    "validationErrors": "Validierungsfehler",
+    "fileSizeError": "Datei ist größer als 10MB",
+    "invalidXRechnung": "XML-Datei ist keine gültige XRechnung",
+    "invalidPDF": "Keine gültige PDF-Datei",
+    "readError": "Fehler beim Lesen der Datei",
+    "typeUnknown": "Typ unbekannt",
+    "preview": {
+      "showMore": "Details anzeigen",
+      "showLess": "Details ausblenden",
+      "pdfPreviewNotAvailable": "PDF-Vorschau nicht verfügbar"
+    }
   }
 } 

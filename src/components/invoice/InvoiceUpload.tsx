@@ -10,7 +10,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  IconButton
+  IconButton,
+  AlertTitle
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDropzone } from 'react-dropzone';
@@ -20,6 +21,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { uploadInvoice } from '../../services/api';
+import { validateInvoiceFile, ValidationResult } from '../../services/fileValidator';
+import FilePreview from './FilePreview';
 
 // Allowed file types
 const ACCEPTED_FILE_TYPES = {
@@ -34,27 +37,37 @@ interface FileWithPreview extends File {
 
 export default function InvoiceUpload() {
   const { t } = useTranslation();
-  const [files, setFiles] = useState<FileWithPreview[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [validationResults, setValidationResults] = useState<{[key: string]: ValidationResult}>({});
 
-  const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: any[]) => {
-    // Handle rejected files
-    if (rejectedFiles.length > 0) {
-      setError(t('upload.invalidFileType'));
-      return;
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    const newValidationResults: {[key: string]: ValidationResult} = {};
+    const validFiles: File[] = [];
+
+    for (const file of acceptedFiles) {
+      const validation = await validateInvoiceFile(file);
+      newValidationResults[file.name] = validation;
+      if (validation.isValid) {
+        validFiles.push(file);
+      }
     }
 
-    setFiles(prevFiles => [...prevFiles, ...acceptedFiles]);
-    setError(null);
-  }, [t]);
+    setValidationResults(prev => ({ ...prev, ...newValidationResults }));
+    if (validFiles.length > 0) {
+      setFiles(prevFiles => [...prevFiles, ...validFiles]);
+    }
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: ACCEPTED_FILE_TYPES,
-    maxSize: 10485760, // 10MB
+    accept: {
+      'application/xml': ['.xml'],
+      'application/pdf': ['.pdf']
+    }
   });
 
   const handleFileUpload = async () => {
@@ -90,8 +103,18 @@ export default function InvoiceUpload() {
     }
   };
 
-  const removeFile = (indexToRemove: number) => {
-    setFiles(prevFiles => prevFiles.filter((_, index) => index !== indexToRemove));
+  const handleDelete = (index: number) => {
+    setFiles(prevFiles => {
+      const newFiles = [...prevFiles];
+      const deletedFile = newFiles[index];
+      if (deletedFile) {
+        const newValidationResults = { ...validationResults };
+        delete newValidationResults[deletedFile.name];
+        setValidationResults(newValidationResults);
+      }
+      newFiles.splice(index, 1);
+      return newFiles;
+    });
   };
 
   const getFileIcon = (fileName: string) => {
@@ -150,7 +173,7 @@ export default function InvoiceUpload() {
               <ListItem
                 key={`${file.name}-${index}`}
                 secondaryAction={
-                  <IconButton edge="end" onClick={() => removeFile(index)}>
+                  <IconButton edge="end" onClick={() => handleDelete(index)}>
                     <DeleteIcon />
                   </IconButton>
                 }
@@ -202,6 +225,18 @@ export default function InvoiceUpload() {
           {t('upload.uploadSuccess')}
         </Alert>
       )}
+
+      {/* File Previews */}
+      <Box sx={{ mt: 3 }}>
+        {files.map((file, index) => (
+          <FilePreview
+            key={`${file.name}-${index}`}
+            file={file}
+            onDelete={() => handleDelete(index)}
+            validationType={validationResults[file.name]?.type}
+          />
+        ))}
+      </Box>
     </Box>
   );
 } 
