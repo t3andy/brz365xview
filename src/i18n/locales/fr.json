@@ -14,6 +14,9 @@
     "selectFiles": "Sélectionner des fichiers",
     "dragDropHint": "Glissez et déposez vos fichiers XRechnung (XML) ou ZUGFeRD (PDF) ici, ou cliquez pour sélectionner des fichiers",
     "uploadSuccess": "Fichiers téléchargés avec succès !",
-    "uploadError": "Échec du téléchargement du fichier. Veuillez réessayer."
+    "uploadError": "Échec du téléchargement du fichier. Veuillez réessayer.",
+    "dropFilesHere": "Déposez les fichiers ici",
+    "invalidFileType": "Type de fichier invalide. Seuls les fichiers XML et PDF sont autorisés.",
+    "uploadFiles": "Télécharger les fichiers"
   }
 } 

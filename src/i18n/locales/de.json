@@ -14,6 +14,11 @@
     "selectFiles": "Dateien auswählen",
     "dragDropHint": "XRechnung (XML) oder ZUGFeRD (PDF) Dateien hier hineinziehen oder klicken zum Auswählen",
     "uploadSuccess": "Dateien erfolgreich hochgeladen!",
-    "uploadError": "Fehler beim Hochladen der Datei. Bitte versuchen Sie es erneut."
+    "uploadError": "Fehler beim Hochladen der Datei. Bitte versuchen Sie es erneut.",
+    "dropFilesHere": "Dateien hier ablegen",
+    "invalidFileType": "Ungültiger Dateityp. Nur XML und PDF Dateien sind erlaubt.",
+    "uploadFiles": "Dateien hochladen",
+    "serverNotReachable": "Server ist nicht erreichbar. Bitte versuchen Sie es später erneut.",
+    "networkError": "Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung."
   }
 } 
