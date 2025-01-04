@@ -10,7 +10,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  CssBaseline
+  CssBaseline,
+  ListItemButton
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -79,15 +80,18 @@ function App() {
           <List>
             {navigationItems.map((item) => (
               <ListItem 
-                button 
-                key={item.text}
+                disablePadding
                 onClick={() => {
                   navigate(item.path);
                   handleDrawerToggle();
                 }}
               >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
+                <ListItemButton>
+                  <ListItemIcon>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
               </ListItem>
             ))}
           </List>
